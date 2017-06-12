@@ -19,11 +19,15 @@ public class DrawingPanel extends JPanel
 {
     //private Circle circle;
     private Collection<Circle> circles;
+    private Collection<Square> squares;
+    
     
     public DrawingPanel() {
         
         //circle = new Circle(25, Color.yellow);
         circles = new Vector<Circle>();
+        squares = new Vector<Square>();
+        
         
         setBackground(Color.GRAY);
         
@@ -31,8 +35,20 @@ public class DrawingPanel extends JPanel
             @Override
             public void mouseClicked(MouseEvent event) {
                 if (!clickIsInsideAnyCircle(event)) {
-                    addNewCircle(event);
+                    
+                    int randomTurn = (int)(2 * Math.random());
+                    
+                    if(randomTurn==1)
+                    {
+                        addNewCircle(event);
+                    }else
+                    {
+                        addNewSquare(event);
+                    }                    
                 }
+                
+                
+                Collections.sort((Vector)circles);
                 repaint();
             }
         });
@@ -42,7 +58,7 @@ public class DrawingPanel extends JPanel
         boolean isInsideAnyCircle = false;
         for (Circle circle: circles) {
             circle.clickAt(event.getX(), event.getY());
-            if (circle.isInsideCircle(event.getX(), event.getY())) {
+            if (circle.contains(event.getX(), event.getY())) {
                 isInsideAnyCircle = true;
             }            
         }
@@ -53,14 +69,20 @@ public class DrawingPanel extends JPanel
         circles.add(new Circle(event.getX(), event.getY()));
     }
     
+    private void addNewSquare(MouseEvent event) {
+        squares.add(new Square(event.getX(), event.getY()));
+    }
+    
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         
-        Collections.sort((Vector)circles);
-        
         for (Circle circle: circles) {
             circle.draw(g);
+        }
+        
+        for (Square square: squares) {
+            square.draw(g);
         }
     }
 }

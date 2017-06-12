@@ -8,13 +8,13 @@ import java.awt.Graphics;
  * @version 0.1 06/09/2017
  */
 
-public class Circle implements Comparable<Circle>
+public class Circle extends AbstractShape implements Comparable<Circle>
 {
     private int radius;
-    private int x;
-    private int y;
-    private Color color;
-    private boolean changeAspect;
+    ///private int x;
+    ///private int y;
+    ///private Color color;
+    ///private boolean changeAspect;
     
     public Circle(int radius, Color color) {
         this.radius = radius;
@@ -39,28 +39,24 @@ public class Circle implements Comparable<Circle>
     }
     
     public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
+        
         if (changeAspect) {
             color = getNextColor();
             changeAspect = false;
             radius = (int)(200 * Math.random());
         }
-        g.setColor(color);
-        g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
+        
     }
     
     public void clickAt(int x, int y) {
-        changeAspect = isInsideCircle(x, y);
+        changeAspect = contains(x, y);
     }
     
-    private Color getNextColor() {
-        int red = (int) (255 * Math.random());
-        int green = (int) (255 * Math.random());
-        int blue = (int) (255 * Math.random());
-        
-        return new Color(red, green, blue);
-    }
+ 
     
-    public boolean isInsideCircle(int x, int y) {
+    public boolean contains(int x, int y) {
         int xCenter = this.x;
         int yCenter = this.y;
         double d = Math.hypot(yCenter - y, xCenter - x);
