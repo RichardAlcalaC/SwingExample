@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 /**
  * Write a description of class DrawingWindow here.
  * 
- * @author Richard Alcala Cuba 
- * @version 0.1 06/09/2017
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 public class DrawingWindow extends JFrame
 {

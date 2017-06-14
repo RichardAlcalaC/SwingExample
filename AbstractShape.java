@@ -1,18 +1,18 @@
+import java.awt.Color;
 
 /**
- * Write a description of class DrawingWindow here.
+ * Abstract class AbstractShape - write a description of the class here
  * 
- * @author Richard Alcala Cuba 
- * @version 0.1 06/12/2017
+ * @author (your name here)
+ * @version (version number or date here)
  */
-
-import java.awt.Color;
 public abstract class AbstractShape
 {
     protected int x;
     protected int y;
     protected Color color;
     protected boolean changeAspect;
+    
     
     protected Color getNextColor() {
         int red = (int) (255 * Math.random());
@@ -21,4 +21,5 @@ public abstract class AbstractShape
         
         return new Color(red, green, blue);
     }
+    
 }

@@ -1,20 +1,16 @@
-import java.awt.Color;
-import java.awt.Graphics;
+
+import java.awt.*;
 
 /**
- * Write a description of class DrawingWindow here.
+ * Write a description of class Circle here.
  * 
- * @author Richard Alcala Cuba 
- * @version 0.1 06/09/2017
+ * @author (your name) 
+ * @version (a version number or a date)
  */
-
-public class Circle extends AbstractShape implements Comparable<Circle>
+public class Circle extends AbstractShape
 {
     private int radius;
-    ///private int x;
-    ///private int y;
-    ///private Color color;
-    ///private boolean changeAspect;
+    
     
     public Circle(int radius, Color color) {
         this.radius = radius;
@@ -28,10 +24,6 @@ public class Circle extends AbstractShape implements Comparable<Circle>
         radius = 25;
     }
     
-    public int getRadius() {
-        return radius;
-    }
-    
     public void draw(Graphics g, int x, int y) {
         this.draw(g);
         this.x = x;
@@ -39,22 +31,22 @@ public class Circle extends AbstractShape implements Comparable<Circle>
     }
     
     public void draw(Graphics g) {
+        
         g.setColor(color);
         g.fillOval(x - radius , y - radius, radius * 2, radius * 2);
-        
+    }
+    
+    public void clickAt(int x, int y) {
+        changeAspect = contains(x, y);
         if (changeAspect) {
             color = getNextColor();
             changeAspect = false;
             radius = (int)(200 * Math.random());
         }
-        
     }
     
-    public void clickAt(int x, int y) {
-        changeAspect = contains(x, y);
-    }
     
- 
+    
     
     public boolean contains(int x, int y) {
         int xCenter = this.x;
@@ -63,9 +55,7 @@ public class Circle extends AbstractShape implements Comparable<Circle>
         return d <= radius;
     }
     
-    @Override
-    public int compareTo(Circle compareCircle) {
-        int compareRadius = ((Circle) compareCircle ).getRadius();
-        return compareRadius - this.radius;
-    }    
+    public int getRadius() {
+        return radius;
+    }
 }
